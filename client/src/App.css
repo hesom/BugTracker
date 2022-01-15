@@ -144,3 +144,7 @@ button:active, input[type="submit"]:active {
   color: var(--bg-color);
   background-color: var(--font-color);
 }
+
+.error {
+  border: 2px solid red;
+}
