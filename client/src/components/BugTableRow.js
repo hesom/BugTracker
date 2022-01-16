@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 
 const BugTableHeader = () => {
     return (
@@ -30,8 +31,10 @@ const BugTableRow = ({ bug }) => {
             throw "status type not supported";
     }
 
+    const navigate = useNavigate();
+
     return (
-        <li className="bug-list-item">
+        <li className="bug-list-item" onClick={(e) => navigate(`/bugs/${bug.id}`)}>
             <span className="short-desc">{bug.short}</span>
             <span>{bug.reporter}</span>
             <span>{bug.date}</span>

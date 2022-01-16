@@ -3,6 +3,8 @@ import { useState } from 'react'
 import BugList from './components/BugList'
 import Navbar from './components/Navbar'
 import AddBugForm from './components/AddBugForm'
+import Bug from './components/Bug'
+
 
 import { Routes, Route } from 'react-router-dom'
 
@@ -46,7 +48,7 @@ const App = () => {
   const [nextId, setNextId] = useState(bugs.length + 1)
 
   const addBug = (bug) => {
-    bug.id = nextId;
+    bug.id = nextId.toString();
     setNextId(nextId + 1);
     setBugs([...bugs, bug]);
   }
@@ -58,6 +60,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<BugList bugs={bugs} />} />
           <Route path="/add" element={<AddBugForm addBug={addBug}/>} />
+          <Route path="/bugs/:bugId" element={<Bug bugs={bugs}/>} />
         </Routes>
       </main>
     </div>

@@ -69,6 +69,7 @@ a {
 
 .bug-list-item {
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .bug-list-item:hover {
@@ -147,4 +148,19 @@ button:active, input[type="submit"]:active {
 
 .error {
   border: 2px solid red;
+}
+
+.bug-long > div:not(:last-child){
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+}
+
+.bug-long > div:last-child {
+  margin-top: 2em;
+  max-width: 80ch;
+}
+
+.bug-long emph {
+  font-weight: bold;
 }
