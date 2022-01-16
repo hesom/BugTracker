@@ -12,38 +12,7 @@ import './App.css'
 
 const App = () => {
 
-  const [bugs, setBugs] = useState([
-    // {
-    //   id: "1",
-    //   short: "Javascript warnings",
-    //   description: "The project still throws lots of Javascript warnings. Each one of them should be addressed",
-    //   reporter: "Hendrik",
-    //   date: "12/01/2022",
-    //   status: "open",
-    //   assignedTo: "Hendrik",
-    //   severity: "low",
-    // },
-    // {
-    //   id: "2",
-    //   short: "Implement forum",
-    //   description: "The forum button still does nothing",
-    //   reporter: "Hendrik",
-    //   date: "12/01/2022",
-    //   status: "closed",
-    //   assignedTo: "Hendrik",
-    //   severity: "medium",
-    // },
-    // {
-    //   id: "3",
-    //   short: "Data leak",
-    //   description: "Our whole database is all over the internet. Maybe saving the passwords in clear text was a bad idea after all",
-    //   reporter: "Hendrik",
-    //   date: "12/01/2022",
-    //   status: "in-progress",
-    //   assignedTo: "Hendrik",
-    //   severity: "critical",
-    // },
-  ])
+  const [bugs, setBugs] = useState([])
 
   useEffect(() => {
 

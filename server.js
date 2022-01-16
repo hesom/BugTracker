@@ -1,5 +1,22 @@
 const express = require("express");
-var cors = require('cors');
+const cors = require('cors');
+const dotenv = require('dotenv')
+const mongoose = require('mongoose');
+
+dotenv.config({ path: ".env" })
+
+const Bug = require('./src/models/Bug');
+const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.j0hsi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const client = mongoose.connect(url, { useNewUrlParser: true })
+const db = mongoose.connection
+
+db.once('open', _ => {
+    console.log('Database connected:', url)
+});
+
+db.on('error', err => {
+    console.error('Connection error:', err)
+})
 
 const app = express();
 const port = 5000;
@@ -7,54 +24,21 @@ const port = 5000;
 app.use(cors())
 app.use(express.json())
 
-let data = [
-{
-    id: "1",
-    short: "Javascript warnings",
-    description: "The project still throws lots of Javascript warnings. Each one of them should be addressed",
-    reporter: "Hendrik",
-    date: "12/01/2022",
-    status: "open",
-    assignedTo: "Hendrik",
-    severity: "low",
-},
-{
-    id: "2",
-    short: "Implement forum",
-    description: "The forum button still does nothing",
-    reporter: "Hendrik",
-    date: "12/01/2022",
-    status: "closed",
-    assignedTo: "Hendrik",
-    severity: "medium",
-},
-{
-    id: "3",
-    short: "Data leak",
-    description: "Our whole database is all over the internet. Maybe saving the passwords in clear text was a bad idea after all",
-    reporter: "Hendrik",
-    date: "12/01/2022",
-    status: "in-progress",
-    assignedTo: "Hendrik",
-    severity: "critical",
-},
-]
+let nextId = 1;
 
-let nextId = data.length + 1;
-
-app.get('/bugs', (req, res) => {
-    res.json(data);
+app.get('/bugs', async (req, res) => {
+    const bugs = await Bug.find({})
+    res.json(bugs);
 });
 
-app.put('/bugs', (req, res) => {
+app.put('/bugs', async (req, res) => {
 
     const newBug = req.body
-    req.body.id = nextId
-    nextId += 1
 
-    data = [...data, newBug]
+    const bug = new Bug(newBug);
+    const doc = await bug.save()
 
-    res.json(newBug);
+    res.json(doc);
 })
 
 app.listen(port, () => {

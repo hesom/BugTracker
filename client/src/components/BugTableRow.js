@@ -34,7 +34,7 @@ const BugTableRow = ({ bug }) => {
     const navigate = useNavigate();
 
     return (
-        <li className="bug-list-item" onClick={(e) => navigate(`/bugs/${bug.id}`)}>
+        <li className="bug-list-item" onClick={(e) => navigate(`/bugs/${bug._id}`)}>
             <span className="short-desc">{bug.short}</span>
             <span>{bug.reporter}</span>
             <span>{bug.date}</span>

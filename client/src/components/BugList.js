@@ -8,7 +8,7 @@ const BugList = ({ bugs }) => {
             <ul className='bug-list'>
                 <BugTableHeader />
                 {bugs.map((bug) => {
-                    return <BugTableRow key={bug.id} bug={bug} />
+                    return <BugTableRow key={bug._id} bug={bug} />
                 })}
             </ul>
         </div>

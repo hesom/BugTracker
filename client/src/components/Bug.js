@@ -3,11 +3,10 @@ import { useParams } from "react-router-dom"
 const Bug = ({ bugs }) => {
 
     const params = useParams();
-
-    const bug = bugs.find((bug) => bug.id === params.bugId)
+    const bug = bugs.find((bug) => bug._id == params.bugId)
 
     return (
-        <div class="bug-long">
+        <div className="bug-long">
             <div className="short">
                 <em>Title: </em><span>{bug.short}</span>
             </div>
