@@ -8,23 +8,23 @@ const Bug = ({ bugs }) => {
 
     return (
         <div class="bug-long">
-            <div class="short">
-                <emph>Title: </emph><span>{bug.short}</span>
+            <div className="short">
+                <em>Title: </em><span>{bug.short}</span>
             </div>
-            <div class="reporter">
-                <emph>Reporter: </emph><span>{bug.reporter}</span>
+            <div className="reporter">
+                <em>Reporter: </em><span>{bug.reporter}</span>
             </div>
-            <div class="date">
-                <emph>Date: </emph><span>{bug.date}</span>
+            <div className="date">
+                <em>Date: </em><span>{bug.date}</span>
             </div>
-            <div class="status">
-                <emph>Status: </emph><span>{bug.status}</span>
+            <div className="status">
+                <em>Status: </em><span>{bug.status}</span>
             </div>
-            <div class="assigned-to">
-                <emph>Assigned To: </emph><span>{bug.assignedTo}</span>
+            <div className="assigned-to">
+                <em>Assigned To: </em><span>{bug.assignedTo}</span>
             </div>
-            <div class="description">
-                <emph>Description: </emph><p>{bug.description}</p>
+            <div className="description">
+                <em>Description: </em><p>{bug.description}</p>
             </div>
         </div>
     )

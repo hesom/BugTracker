@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import BugList from './components/BugList'
 import Navbar from './components/Navbar'
@@ -13,44 +13,68 @@ import './App.css'
 const App = () => {
 
   const [bugs, setBugs] = useState([
-    {
-      id: "1",
-      short: "Javascript warnings",
-      description: "The project still throws lots of Javascript warnings. Each one of them should be addressed",
-      reporter: "Hendrik",
-      date: "12/01/2022",
-      status: "open",
-      assignedTo: "Hendrik",
-      severity: "low",
-    },
-    {
-      id: "2",
-      short: "Implement forum",
-      description: "The forum button still does nothing",
-      reporter: "Hendrik",
-      date: "12/01/2022",
-      status: "closed",
-      assignedTo: "Hendrik",
-      severity: "medium",
-    },
-    {
-      id: "3",
-      short: "Data leak",
-      description: "Our whole database is all over the internet. Maybe saving the passwords in clear text was a bad idea after all",
-      reporter: "Hendrik",
-      date: "12/01/2022",
-      status: "in-progress",
-      assignedTo: "Hendrik",
-      severity: "critical",
-    },
+    // {
+    //   id: "1",
+    //   short: "Javascript warnings",
+    //   description: "The project still throws lots of Javascript warnings. Each one of them should be addressed",
+    //   reporter: "Hendrik",
+    //   date: "12/01/2022",
+    //   status: "open",
+    //   assignedTo: "Hendrik",
+    //   severity: "low",
+    // },
+    // {
+    //   id: "2",
+    //   short: "Implement forum",
+    //   description: "The forum button still does nothing",
+    //   reporter: "Hendrik",
+    //   date: "12/01/2022",
+    //   status: "closed",
+    //   assignedTo: "Hendrik",
+    //   severity: "medium",
+    // },
+    // {
+    //   id: "3",
+    //   short: "Data leak",
+    //   description: "Our whole database is all over the internet. Maybe saving the passwords in clear text was a bad idea after all",
+    //   reporter: "Hendrik",
+    //   date: "12/01/2022",
+    //   status: "in-progress",
+    //   assignedTo: "Hendrik",
+    //   severity: "critical",
+    // },
   ])
 
-  const [nextId, setNextId] = useState(bugs.length + 1)
+  useEffect(() => {
+
+    const getData = async () => {
+      let data = await fetch('http://localhost:5000/bugs')
+      let bugs = await data.json()
+      setBugs(bugs);
+    }
+    
+    getData();
+
+  }, []);
 
   const addBug = (bug) => {
-    bug.id = nextId.toString();
-    setNextId(nextId + 1);
-    setBugs([...bugs, bug]);
+
+    const requestOptions = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(bug),
+    };
+
+    const sendToServer = async () => {
+      let data = await fetch('http://localhost:5000/bugs', requestOptions)
+      let newBug = await data.json()
+
+      setBugs([...bugs, newBug])
+    }
+
+    sendToServer()
   }
 
   return(

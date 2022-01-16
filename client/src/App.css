@@ -161,6 +161,6 @@ button:active, input[type="submit"]:active {
   max-width: 80ch;
 }
 
-.bug-long emph {
+.bug-long em {
   font-weight: bold;
 }
