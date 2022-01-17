@@ -29,7 +29,7 @@ const App = () => {
   const addBug = (bug) => {
 
     const requestOptions = {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },

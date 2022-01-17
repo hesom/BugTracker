@@ -31,7 +31,7 @@ app.get('/bugs', async (req, res) => {
     res.json(bugs);
 });
 
-app.put('/bugs', async (req, res) => {
+app.post('/bugs', async (req, res) => {
 
     const newBug = req.body
 
