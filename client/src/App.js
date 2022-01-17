@@ -53,7 +53,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<BugList bugs={bugs} />} />
           <Route path="/add" element={<AddBugForm addBug={addBug}/>} />
-          <Route path="/bugs/:bugId" element={<Bug bugs={bugs}/>} />
+          <Route path="/bugs/:bugId" element={<Bug />} />
           <Route path="*" element={<Navigate to="/"/>} />
         </Routes>
       </main>

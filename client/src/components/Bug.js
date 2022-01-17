@@ -1,9 +1,19 @@
 import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
 
-const Bug = ({ bugs }) => {
+const Bug = () => {
+    const { bugId } = useParams();
+    const [bug, setBug] = useState({})
 
-    const params = useParams();
-    const bug = bugs.find((bug) => bug._id == params.bugId)
+    useEffect(() => {
+        const getData = async () => {
+            fetch(`/bugs/${bugId}`)
+                .then(data => data.json())
+                .then(bug => setBug(bug))
+        }
+
+        getData()
+    }, [bugId])
 
     return (
         <div className="bug-long">
