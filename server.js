@@ -1,4 +1,5 @@
-const express = require("express");
+const express = require('express');
+const path = require('path')
 const cors = require('cors');
 const dotenv = require('dotenv')
 const mongoose = require('mongoose');
@@ -21,10 +22,9 @@ db.on('error', err => {
 const app = express();
 const port = 5000;
 
-app.use(cors())
 app.use(express.json())
 
-let nextId = 1;
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get('/bugs', async (req, res) => {
     const bugs = await Bug.find({})
@@ -40,6 +40,10 @@ app.put('/bugs', async (req, res) => {
 
     res.json(doc);
 })
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

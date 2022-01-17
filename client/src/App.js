@@ -17,7 +17,7 @@ const App = () => {
   useEffect(() => {
 
     const getData = async () => {
-      let data = await fetch('http://localhost:5000/bugs')
+      let data = await fetch('/bugs')
       let bugs = await data.json()
       setBugs(bugs);
     }
@@ -37,7 +37,7 @@ const App = () => {
     };
 
     const sendToServer = async () => {
-      let data = await fetch('http://localhost:5000/bugs', requestOptions)
+      let data = await fetch('/bugs', requestOptions)
       let newBug = await data.json()
 
       setBugs([...bugs, newBug])
