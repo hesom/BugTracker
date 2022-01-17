@@ -46,6 +46,12 @@ app.get('/bugs/:id', async (req, res) => {
     res.json(bug);
 })
 
+app.delete('/bugs/:id', async (req, res) => {
+    await Bug.findOneAndRemove({_id: req.params.id });
+    const bugs = await Bug.find({});
+    res.json(bugs);
+})
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
