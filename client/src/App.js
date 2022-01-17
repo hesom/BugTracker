@@ -6,7 +6,7 @@ import AddBugForm from './components/AddBugForm'
 import Bug from './components/Bug'
 
 
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 import './App.css'
 
@@ -54,6 +54,7 @@ const App = () => {
           <Route path="/" element={<BugList bugs={bugs} />} />
           <Route path="/add" element={<AddBugForm addBug={addBug}/>} />
           <Route path="/bugs/:bugId" element={<Bug bugs={bugs}/>} />
+          <Route path="*" element={<Navigate to="/"/>} />
         </Routes>
       </main>
     </div>
