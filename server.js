@@ -41,6 +41,11 @@ app.put('/bugs', async (req, res) => {
     res.json(doc);
 })
 
+app.get('/bugs/:id', async (req, res) => {
+    const bug = await Bug.findById(req.params.id);
+    res.json(bug);
+})
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
