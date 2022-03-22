@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 dotenv.config({ path: ".env" })
 
-const Bug = require('./src/models/Bug');
+const {Bug, User} = require('./src/models/Bug');
 const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.j0hsi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = mongoose.connect(url, { useNewUrlParser: true })
 const db = mongoose.connection

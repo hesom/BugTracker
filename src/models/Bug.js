@@ -11,4 +11,12 @@ const bugSchema = new Schema({
     severity: String,
 });
 
-module.exports = mongoose.model('Bug', bugSchema);
+const userSchema = new Schema({
+    name: String,
+    email: String
+});
+
+module.exports = {
+    Bug: mongoose.model('Bug', bugSchema),
+    User: mongoose.model('User', userSchema),
+};
