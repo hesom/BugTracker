@@ -26,8 +26,13 @@ app.use(express.json())
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get('/bugs', async (req, res) => {
-    const bugs = await Bug.find({})
+    const bugs = await Bug.find({});
     res.json(bugs);
+});
+
+app.get('/users', async (req, res) => {
+    const users = await User.find({});
+    res.json(users);
 });
 
 app.post('/bugs', async (req, res) => {
@@ -38,7 +43,7 @@ app.post('/bugs', async (req, res) => {
     const doc = await bug.save()
 
     res.json(doc);
-})
+});
 
 app.get('/bugs/:id', async (req, res) => {
     const bug = await Bug.findById(req.params.id);
