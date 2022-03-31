@@ -45,16 +45,25 @@ app.post('/bugs', async (req, res) => {
     res.json(doc);
 });
 
+app.post('/users', async (req, res) => {
+    const newUser = req.body;
+
+    const user = new User(newUser);
+    const doc = await user.save();
+
+    res.json(doc);
+});
+
 app.get('/bugs/:id', async (req, res) => {
     const bug = await Bug.findById(req.params.id);
     res.json(bug);
-})
+});
 
 app.delete('/bugs/:id', async (req, res) => {
     await Bug.findOneAndRemove({_id: req.params.id });
     const bugs = await Bug.find({});
     res.json(bugs);
-})
+});
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/build/index.html'));
