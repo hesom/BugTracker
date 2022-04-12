@@ -30,26 +30,12 @@ app.get('/bugs', async (req, res) => {
     res.json(bugs);
 });
 
-app.get('/users', async (req, res) => {
-    const users = await User.find({});
-    res.json(users);
-});
-
 app.post('/bugs', async (req, res) => {
 
     const newBug = req.body;
 
     const bug = new Bug(newBug);
     const doc = await bug.save();
-
-    res.json(doc);
-});
-
-app.post('/users', async (req, res) => {
-    const newUser = req.body;
-
-    const user = new User(newUser);
-    const doc = await user.save();
 
     res.json(doc);
 });
@@ -63,6 +49,25 @@ app.delete('/bugs/:id', async (req, res) => {
     await Bug.findOneAndRemove({_id: req.params.id });
     const bugs = await Bug.find({});
     res.json(bugs);
+});
+
+app.get('/users', async (req, res) => {
+    const users = await User.find({});
+    res.json(users);
+});
+
+app.post('/users', async (req, res) => {
+    const newUser = req.body;
+
+    const user = new User(newUser);
+    const doc = await user.save();
+
+    res.json(doc);
+});
+
+app.get('/users/:id', async (req, res) => {
+    const user = await User.findById(req.params.id);
+    res.json(user); 
 });
 
 app.get('*', (req, res) => {
